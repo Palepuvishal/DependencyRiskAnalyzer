@@ -5,6 +5,7 @@ import { useProject } from "@/lib/ProjectContext";
 import { getRisk, getIngestions } from "@/lib/api";
 import { TrendingDown, TrendingUp, Shield, RefreshCw, Download, CalendarDays, Search, ChevronRight, ChevronLeft, Terminal, CheckCircle2, AlertTriangle, XCircle, Info } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toPng } from "html-to-image";
 
 export default function Dashboard() {
   const { selectedProject, selectedVuln, setSelectedVuln, pathIndex, setPathIndex, hoveredLibrary, setHoveredLibrary } = useProject();
@@ -14,7 +15,9 @@ export default function Dashboard() {
   const [ingestions, setIngestions] = useState<any[]>([]);
   const [filter, setFilter] = useState("");
   const [hoveredBlock, setHoveredBlock] = useState<any>(null);
+  const [isExporting, setIsExporting] = useState(false);
   const prevDataRef = useRef<string | null>(null);
+  const dashboardRef = useRef<HTMLDivElement>(null);
 
   const handleBlockClick = (block: any) => {
     if (!data?.vulnerabilities) return;
@@ -34,6 +37,27 @@ export default function Dashboard() {
   const handleMouseLeave = () => {
     setHoveredBlock(null);
     setHoveredLibrary(null);
+  };
+
+  const handleExport = async () => {
+    if (!dashboardRef.current) return;
+    setIsExporting(true);
+    try {
+      // Adding a small delay ensures any hover effects are cleared before capture
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      const image = await toPng(dashboardRef.current, {
+        backgroundColor: '#15171C',
+        pixelRatio: 2,
+      });
+      const link = document.createElement("a");
+      link.download = `Risk_Dashboard_${selectedProject}_${new Date().toISOString().split('T')[0]}.png`;
+      link.href = image;
+      link.click();
+    } catch (err) {
+      console.error("Export failed", err);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   const getSeverityColor = (sev: string) => {
@@ -235,7 +259,7 @@ export default function Dashboard() {
 
 
   return (
-    <div className="p-6 space-y-6">
+    <div ref={dashboardRef} className="p-6 space-y-6 bg-[#15171C]">
       {/* Header Section */}
       <div className="flex items-end justify-between">
         <div>
@@ -243,13 +267,17 @@ export default function Dashboard() {
           <p className="font-body-base text-sm text-[#8a919e] mt-1">Ecosystem-wide dependency security metrics and critical paths.</p>
         </div>
         <div className="flex gap-2">
-          <button className="bg-[#282a2e] border border-[#404753] px-4 py-2 flex items-center gap-2 rounded hover:border-[#a6c8ff] transition-all">
-            <CalendarDays size={18} />
-            <span className="font-label-caps text-[11px] font-bold uppercase tracking-wider">Last 30 Days</span>
-          </button>
-          <button className="bg-[#a6c8ff] text-[#002a53] px-4 py-2 flex items-center gap-2 rounded font-label-caps text-[11px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity">
-            <Download size={18} />
-            Export Report
+          <button 
+            onClick={handleExport}
+            disabled={isExporting}
+            className={`bg-[#a6c8ff] text-[#002a53] px-4 py-2 flex items-center gap-2 rounded font-label-caps text-[11px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity ${isExporting ? 'opacity-50 cursor-not-allowed' : ''}`}
+          >
+            {isExporting ? (
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#002a53]"></div>
+            ) : (
+              <Download size={18} />
+            )}
+            {isExporting ? 'Exporting...' : 'Export Report'}
           </button>
         </div>
       </div>
