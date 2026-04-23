@@ -17,6 +17,8 @@ router.get("/", async (req, res) => {
         COALESCE(v.id, v.cve_id) AS vulnerabilityId,
         COALESCE(v.severity, 'MEDIUM') AS severity,
         lib.name AS library,
+        COALESCE(lib.language, 'unknown') AS language,
+        COALESCE(lib.ecosystem, ver.ecosystem, 'npm') AS ecosystem,
         COALESCE(ver.number, ver.name) AS version,
         nodes(p) AS pathNodes,
         relationships(p) AS pathRels
@@ -34,6 +36,8 @@ router.get("/", async (req, res) => {
       const vulnIdFromDB = record.get("vulnerabilityId");
       const library = record.get("library");
       const version = record.get("version");
+      const language = record.get("language") || "unknown";
+      const ecosystem = record.get("ecosystem") || "npm";
       const pathSeverity = (record.get("severity") || "MEDIUM").toUpperCase();
       
       const pathNodesRaw = record.get("pathNodes");
@@ -72,7 +76,8 @@ router.get("/", async (req, res) => {
             label: meaningfulId,
             type: type,
             role: type,
-            severity: "NONE"
+            severity: "NONE",
+            ...(type === "Library" ? { language, ecosystem } : {})
           });
           if (type === "Project") nodeMap.get(meaningfulId).isEntry = true;
         }
@@ -114,6 +119,8 @@ router.get("/", async (req, res) => {
           severityScore: severityOrder[pathSeverity] || 0,
           library: library || "UNIDENTIFIED-LIBRARY",
           version: version || "VERSION-MISSING",
+          ecosystem: ecosystem,
+          language: language,
           reachable: true,
           pathCount: 0,
           paths: []
