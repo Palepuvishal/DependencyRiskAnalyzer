@@ -85,9 +85,7 @@ CREATE (p3)-[:USES]->(axios)
 
 // ── Dependency Chains (transitive paths) ───────────────
 CREATE (express)-[:DEPENDS_ON]->(lodash)
-CREATE (axios)-[:DEPENDS_ON]->(lodash)
 CREATE (debug)-[:DEPENDS_ON]->(ms:Library {name: 'ms', language: 'javascript', ecosystem: 'npm'})
-CREATE (ms)-[:DEPENDS_ON]->(lodash)
 CREATE (chalk)-[:DEPENDS_ON]->(ansi:Library {name: 'ansi', language: 'javascript', ecosystem: 'npm'})
 CREATE (ansi)-[:DEPENDS_ON]->(lodash)
 
