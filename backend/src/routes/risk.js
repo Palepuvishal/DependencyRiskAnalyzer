@@ -208,7 +208,7 @@ router.get("/", async (req, res) => {
       vulnerabilities,
       graph: {
         nodes: Array.from(nodeMap.values()),
-        edges: validEdges
+        edges: Array.from(edgeMap.values())
       }
     });
   } catch (err) {
