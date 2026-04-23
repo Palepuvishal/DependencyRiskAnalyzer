@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-error": "#690005",
+            "tertiary": "#ffb782",
+            "secondary-fixed-dim": "#bdc7de",
+            "error": "#ffb4ab",
+            "secondary": "#bdc7de",
+            "inverse-surface": "#e2e2e8",
+            "on-primary-container": "#002a53",
+            "inverse-primary": "#005fb0",
+            "surface-tint": "#a6c8ff",
+            "surface-bright": "#37393e",
+            "tertiary-container": "#de7403",
+            "outline-variant": "#404753",
+            "primary-fixed": "#d5e3ff",
+            "on-secondary-container": "#aeb8d0",
+            "surface-container": "#1e2024",
+            "outline": "#8a919e",
+            "on-primary-fixed": "#001c3b",
+            "surface-container-high": "#282a2e",
+            "secondary-container": "#3f495d",
+            "surface": "#111317",
+            "surface-container-highest": "#333539",
+            "on-primary": "#00315f",
+            "inverse-on-surface": "#2f3035",
+            "primary-container": "#3192fc",
+            "error-container": "#93000a",
+            "on-secondary": "#273143",
+            "on-secondary-fixed": "#111c2d",
+            "on-tertiary-fixed-variant": "#703800",
+            "surface-container-lowest": "#0c0e12",
+            "on-tertiary-fixed": "#301400",
+            "on-error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#004786",
+            "surface-dim": "#111317",
+            "secondary-fixed": "#d9e3fb",
+            "on-secondary-fixed-variant": "#3d475a",
+            "on-surface-variant": "#c0c7d5",
+            "primary": "#a6c8ff",
+            "on-tertiary": "#4f2500",
+            "background": "#111317",
+            "surface-container-low": "#1a1c20",
+            "on-surface": "#e2e2e8",
+            "tertiary-fixed": "#ffdcc5",
+            "on-background": "#e2e2e8",
+            "surface-variant": "#333539",
+            "on-tertiary-container": "#452000",
+            "primary-fixed-dim": "#a6c8ff",
+            "tertiary-fixed-dim": "#ffb782"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "canvas-margin": "24px",
+            "gutter": "16px",
+            "base": "4px",
+            "md": "16px",
+            "xs": "8px",
+            "lg": "24px",
+            "sm": "12px",
+            "xl": "32px"
+          },
+          "fontFamily": {
+            "headline-md": ["Inter"],
+            "code-sm": ["Space Grotesk"],
+            "display-lg": ["Inter"],
+            "body-base": ["Inter"],
+            "body-sm": ["Inter"],
+            "code-md": ["Space Grotesk"],
+            "label-caps": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "500"}],
+            "display-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+            "label-caps": ["11px", {"lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .node-pulse {
+      box-shadow: 0 0 0 0 rgba(255, 180, 171, 0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 180, 171, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(255, 180, 171, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 180, 171, 0); }
+    }
+    .graph-bg {
+      background-image: radial-gradient(circle at 2px 2px, #222934 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface selection:bg-primary-container selection:text-on-primary-container overflow-hidden">
+<!-- TopNavBar Shell -->
+<header class="bg-slate-900 dark:bg-[#15171C] border-b border-slate-800 dark:border-[#222934] flex items-center justify-between px-4 w-full sticky top-0 z-50 h-14">
+<div class="flex items-center gap-8">
+<div class="text-lg font-black tracking-tighter text-slate-100 uppercase">SecOps Sentinel</div>
+<div class="relative group">
+<button class="flex items-center gap-2 bg-slate-800/50 dark:bg-[#1F242D] px-3 py-1.5 border border-slate-700 dark:border-[#222934] rounded hover:border-blue-500 transition-colors">
+<span class="font-label-caps text-slate-400">PROJECT:</span>
+<span class="font-body-base text-on-surface">CloudCore-API-v4</span>
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-outline-variant rounded">
+<span class="material-symbols-outlined text-[18px] text-slate-400">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body-sm w-48 text-on-surface" placeholder="Search dependencies..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="hover:bg-slate-800 dark:hover:bg-[#1F242D] transition-colors p-2 rounded cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-slate-400">notifications</span>
+</button>
+<button class="hover:bg-slate-800 dark:hover:bg-[#1F242D] transition-colors p-2 rounded cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-slate-400">help</span>
+</button>
+<div class="h-8 w-8 bg-primary-container rounded-full flex items-center justify-center text-on-primary-container font-bold text-xs">
+          OP
+        </div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-3.5rem)]">
+<!-- SideNavBar Shell -->
+<aside class="bg-slate-900 dark:bg-[#15171C] border-r border-slate-800 dark:border-[#222934] flex flex-col h-full w-[280px] overflow-y-auto shrink-0">
+<div class="p-6">
+<div class="text-blue-500 font-mono font-bold text-sm tracking-widest">CYBER_SHELL</div>
+<div class="text-[10px] text-slate-500 font-code-sm">v2.4.0-stable</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 font-['Inter'] uppercase text-[11px] font-bold tracking-widest duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+          Dashboard
+        </div>
+<div class="bg-blue-500/10 text-blue-500 border-r-2 border-blue-500 px-4 py-3 flex items-center gap-3 font-['Inter'] uppercase text-[11px] font-bold tracking-widest duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined">account_tree</span>
+          Workbench
+        </div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 font-['Inter'] uppercase text-[11px] font-bold tracking-widest duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined">security</span>
+          Vulnerabilities
+        </div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 font-['Inter'] uppercase text-[11px] font-bold tracking-widest duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined">storage</span>
+          Data Management
+        </div>
+</nav>
+<div class="mt-auto border-t border-slate-800 dark:border-[#222934] p-2">
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 font-['Inter'] uppercase text-[11px] font-bold tracking-widest duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined">terminal</span>
+          System Logs
+        </div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 font-['Inter'] uppercase text-[11px] font-bold tracking-widest duration-200 ease-in-out cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+          Settings
+        </div>
+<div class="mt-4 px-4 py-4 bg-surface-container-low rounded border border-outline-variant m-2">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">admin_panel_settings</span>
+</div>
+<div>
+<div class="text-[10px] font-bold text-on-surface">System Operator</div>
+<div class="text-[9px] text-slate-500 font-code-sm">Level 4 Access</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workbench Canvas -->
+<main class="flex-1 relative bg-surface-container-lowest overflow-hidden graph-bg">
+<!-- Canvas Controls -->
+<div class="absolute top-6 left-6 z-10 flex flex-col gap-2">
+<div class="flex items-center gap-2 p-1 bg-surface-container border border-outline-variant rounded-lg">
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors text-slate-400">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors text-slate-400">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<div class="w-px h-4 bg-outline-variant mx-1"></div>
+<button class="p-2 hover:bg-surface-container-high rounded transition-colors text-slate-400">
+<span class="material-symbols-outlined">fit_screen</span>
+</button>
+</div>
+<div class="px-3 py-2 bg-surface-container border border-outline-variant rounded-lg">
+<span class="font-label-caps text-[10px] text-slate-500 block mb-1">VIEWPORT COORDINATES</span>
+<span class="font-code-sm text-xs text-primary">X: 1,402 | Y: -842 | Z: 1.0</span>
+</div>
+</div>
+<!-- Graph Nodes (Simulated) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+<!-- Lines connecting nodes -->
+<line stroke="#2E90FA" stroke-dasharray="4 4" stroke-width="1.5" x1="50%" x2="40%" y1="50%" y2="40%"></line>
+<line stroke="#2E90FA" stroke-width="1" x1="40%" x2="30%" y1="40%" y2="35%"></line>
+<line stroke="#ffb4ab" stroke-width="2" x1="30%" x2="20%" y1="35%" y2="45%"></line>
+<line stroke="#2E90FA" stroke-width="1.5" x1="50%" x2="60%" y1="50%" y2="60%"></line>
+<line stroke="#2E90FA" stroke-width="1" x1="60%" x2="70%" y1="60%" y2="65%"></line>
+</svg>
+<!-- Project Node -->
+<div class="absolute translate-x-[0%] translate-y-[0%] pointer-events-auto cursor-pointer">
+<div class="bg-[#1F242D] border-2 border-primary w-48 p-3 rounded-lg shadow-xl ring-4 ring-primary/10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-weight="fill">hub</span>
+<span class="font-label-caps text-on-surface">MAIN_PROJECT</span>
+</div>
+<div class="font-code-md text-sm text-on-surface-variant truncate">CloudCore API</div>
+<div class="mt-2 flex gap-1">
+<div class="h-1 w-full bg-primary/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Library Node -->
+<div class="absolute -translate-x-[150%] -translate-y-[100%] pointer-events-auto cursor-pointer">
+<div class="bg-[#1F242D] border border-outline-variant w-40 p-3 rounded-lg shadow-lg hover:border-primary transition-colors">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">package</span>
+<span class="font-label-caps text-[10px] text-slate-400">LIBRARY</span>
+</div>
+<div class="font-code-md text-xs text-on-surface truncate">express-auth-v2</div>
+</div>
+</div>
+<!-- Vulnerability Node (CRITICAL) -->
+<div class="absolute -translate-x-[250%] -translate-y-[50%] pointer-events-auto cursor-pointer">
+<div class="bg-error-container/40 border-2 border-error w-44 p-3 rounded-lg shadow-xl node-pulse">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-error text-[18px]" data-weight="fill">report</span>
+<span class="font-label-caps text-[10px] text-error">CRITICAL_VULN</span>
+</div>
+<div class="font-code-md text-xs text-on-error-container font-bold truncate">CVE-2024-9981</div>
+<div class="mt-2 text-[10px] text-on-error-container/80 font-body-sm leading-tight">Remote Code Execution via malformed headers</div>
+</div>
+</div>
+<!-- Secondary Library -->
+<div class="absolute translate-x-[120%] translate-y-[100%] pointer-events-auto cursor-pointer">
+<div class="bg-[#1F242D] border border-outline-variant w-40 p-3 rounded-lg shadow-lg">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">package</span>
+<span class="font-label-caps text-[10px] text-slate-400">LIBRARY</span>
+</div>
+<div class="font-code-md text-xs text-on-surface truncate">lodasher-utils</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 left-6 p-4 bg-surface-container/80 backdrop-blur-md border border-outline-variant rounded-xl max-w-sm">
+<h4 class="font-label-caps text-xs text-slate-400 mb-3">CANVAS LEGEND</h4>
+<div class="grid grid-cols-2 gap-3">
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Active Project</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-error"></div>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Critical Risk</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-tertiary"></div>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Medium Risk</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-2 w-2 rounded-full bg-slate-500"></div>
+<span class="font-body-sm text-[11px] text-on-surface-variant">Stable Package</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Side Inspector Panel -->
+<aside class="w-[360px] bg-[#15171C] border-l border-slate-800 dark:border-[#222934] flex flex-col h-full overflow-hidden shrink-0">
+<div class="p-6 border-b border-[#222934]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Risk Panel</h2>
+<!-- Summary Stats Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant">
+<div class="font-label-caps text-[10px] text-slate-500 mb-1">TOTAL LIBRARIES</div>
+<div class="font-display-lg text-display-lg text-on-surface">142</div>
+</div>
+<div class="bg-error-container/10 p-4 rounded-lg border border-error/30">
+<div class="font-label-caps text-[10px] text-error mb-1">CRITICAL VULNS</div>
+<div class="font-display-lg text-display-lg text-error">12</div>
+</div>
+</div>
+</div>
+<!-- Critical Nodes Section -->
+<div class="flex-1 overflow-y-auto">
+<div class="p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-label-caps text-xs text-on-surface-variant uppercase">Critical Nodes</h3>
+<span class="font-code-sm text-xs text-error underline cursor-pointer">Export CSV</span>
+</div>
+<div class="space-y-3">
+<!-- Node Card 1 -->
+<div class="group p-3 bg-surface-container border-l-4 border-error hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-md text-sm text-on-surface">express-auth</span>
+<span class="bg-error text-white font-label-caps text-[9px] px-1.5 rounded">9.8</span>
+</div>
+<div class="font-body-sm text-xs text-slate-500 mb-2">CVE-2024-9981 - Remote Exploit</div>
+<div class="flex gap-2">
+<span class="font-code-sm text-[10px] text-secondary py-0.5 px-2 bg-secondary-container rounded">auth-server</span>
+<span class="font-code-sm text-[10px] text-slate-400 py-0.5 px-2 bg-outline-variant rounded">v2.4.1</span>
+</div>
+</div>
+<!-- Node Card 2 -->
+<div class="group p-3 bg-surface-container border-l-4 border-error hover:bg-surface-container-high transition-all cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-md text-sm text-on-surface">lib-xml-parser</span>
+<span class="bg-error text-white font-label-caps text-[9px] px-1.5 rounded">9.1</span>
+</div>
+<div class="font-body-sm text-xs text-slate-500 mb-2">CVE-2023-4412 - Buffer Overflow</div>
+<div class="flex gap-2">
+<span class="font-code-sm text-[10px] text-secondary py-0.5 px-2 bg-secondary-container rounded">core-engine</span>
+<span class="font-code-sm text-[10px] text-slate-400 py-0.5 px-2 bg-outline-variant rounded">v0.9.3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Path Explanation Section -->
+<div class="p-6 border-t border-[#222934] bg-surface-container-lowest">
+<h3 class="font-label-caps text-xs text-on-surface-variant uppercase mb-6">Path Explanation</h3>
+<div class="relative space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-outline-variant">
+<!-- Step 1 -->
+<div class="relative flex gap-4">
+<div class="relative z-10 w-6 h-6 rounded-full bg-primary border-4 border-surface-container-lowest"></div>
+<div>
+<div class="font-code-md text-sm text-primary">CloudCore-API</div>
+<div class="font-body-sm text-xs text-slate-500">Root Project Repository</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex gap-4">
+<div class="relative z-10 w-6 h-6 rounded-full bg-slate-700 border-4 border-surface-container-lowest"></div>
+<div>
+<div class="font-code-md text-sm text-on-surface">internal-auth-adapter</div>
+<div class="font-body-sm text-xs text-slate-500">Direct Dependency</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex gap-4">
+<div class="relative z-10 w-6 h-6 rounded-full bg-slate-700 border-4 border-surface-container-lowest"></div>
+<div>
+<div class="font-code-md text-sm text-on-surface">express-auth-v2</div>
+<div class="font-body-sm text-xs text-slate-500">Transitive Dependency</div>
+</div>
+</div>
+<!-- Step 4 (Target) -->
+<div class="relative flex gap-4">
+<div class="relative z-10 w-6 h-6 rounded-full bg-error border-4 border-surface-container-lowest"></div>
+<div>
+<div class="font-code-md text-sm text-error font-bold">CVE-2024-9981</div>
+<div class="font-body-sm text-xs text-error/80">Terminal Vulnerability Node</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 bg-primary text-on-primary py-3 rounded font-label-caps text-xs flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+            AUTO-REMEDIATE PATH
+          </button>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

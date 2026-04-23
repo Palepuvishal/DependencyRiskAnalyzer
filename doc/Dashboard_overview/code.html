@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "secondary-container": "#3f495d",
+                        "inverse-surface": "#e2e2e8",
+                        "error-container": "#93000a",
+                        "outline": "#8a919e",
+                        "surface-container-highest": "#333539",
+                        "secondary": "#bdc7de",
+                        "tertiary": "#ffb782",
+                        "background": "#111317",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#aeb8d0",
+                        "inverse-primary": "#005fb0",
+                        "on-background": "#e2e2e8",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-primary-container": "#002a53",
+                        "tertiary-fixed-dim": "#ffb782",
+                        "on-secondary": "#273143",
+                        "tertiary-fixed": "#ffdcc5",
+                        "tertiary-container": "#de7403",
+                        "on-secondary-fixed-variant": "#3d475a",
+                        "secondary-fixed-dim": "#bdc7de",
+                        "primary-fixed-dim": "#a6c8ff",
+                        "on-surface-variant": "#c0c7d5",
+                        "on-tertiary-fixed-variant": "#703800",
+                        "surface-tint": "#a6c8ff",
+                        "on-tertiary-fixed": "#301400",
+                        "on-primary": "#00315f",
+                        "surface-container-lowest": "#0c0e12",
+                        "on-tertiary-container": "#452000",
+                        "surface-dim": "#111317",
+                        "surface-container-high": "#282a2e",
+                        "surface-bright": "#37393e",
+                        "secondary-fixed": "#d9e3fb",
+                        "surface": "#111317",
+                        "inverse-on-surface": "#2f3035",
+                        "surface-container": "#1e2024",
+                        "on-primary-fixed-variant": "#004786",
+                        "primary": "#a6c8ff",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-container-low": "#1a1c20",
+                        "primary-fixed": "#d5e3ff",
+                        "on-surface": "#e2e2e8",
+                        "on-tertiary": "#4f2500",
+                        "surface-variant": "#333539",
+                        "outline-variant": "#404753",
+                        "on-error-container": "#ffdad6",
+                        "primary-container": "#3192fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "md": "16px",
+                        "gutter": "16px",
+                        "canvas-margin": "24px",
+                        "base": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "code-sm": ["Space Grotesk"],
+                        "code-md": ["Space Grotesk"],
+                        "body-base": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-base": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .risk-stripe-critical { border-left: 4px solid #ffb4ab; }
+        .risk-stripe-high { border-left: 4px solid #de7403; }
+        .risk-stripe-medium { border-left: 4px solid #bdc7de; }
+        .risk-stripe-low { border-left: 4px solid #8a919e; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0c0e12; }
+        ::-webkit-scrollbar-thumb { background: #333539; border-radius: 3px; }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body-base antialiased selection:bg-primary/30 selection:text-primary-fixed">
+<!-- TopNavBar Shell -->
+<header class="bg-slate-900 dark:bg-[#15171C] border-b border-slate-800 dark:border-[#222934] flex items-center justify-between px-4 w-full sticky top-0 z-50 h-14">
+<div class="flex items-center gap-6">
+<div class="text-lg font-black tracking-tighter text-slate-100 uppercase">SecOps Sentinel</div>
+<div class="hidden md:flex items-center gap-4">
+<div class="text-blue-500 border-b-2 border-blue-500 py-4 font-['Inter'] text-sm tracking-tight font-medium cursor-pointer">Dashboard</div>
+<div class="text-slate-400 font-['Inter'] text-sm tracking-tight font-medium hover:bg-slate-800 dark:hover:bg-[#1F242D] transition-colors cursor-pointer px-2 py-1 rounded">Workbench</div>
+<div class="text-slate-400 font-['Inter'] text-sm tracking-tight font-medium hover:bg-slate-800 dark:hover:bg-[#1F242D] transition-colors cursor-pointer px-2 py-1 rounded">Vulnerabilities</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-blue-500 transition-colors cursor-pointer">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border border-[#15171C]"></span>
+</div>
+<span class="material-symbols-outlined text-slate-400 hover:text-blue-500 transition-colors cursor-pointer">help</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-blue-500 transition-colors cursor-pointer">account_circle</span>
+</div>
+</header>
+<div class="flex min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="bg-slate-900 dark:bg-[#15171C] border-r border-slate-800 dark:border-[#222934] flex flex-col h-screen fixed left-0 top-14 w-[280px] overflow-y-auto hidden lg:flex">
+<div class="p-6">
+<div class="text-blue-500 font-mono font-bold text-sm tracking-widest">CYBER_SHELL</div>
+<div class="text-slate-500 text-[10px] font-medium tracking-tighter">v2.4.0-stable</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<div class="bg-blue-500/10 text-blue-500 border-r-2 border-blue-500 px-4 py-3 flex items-center gap-3 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] uppercase text-[11px] font-bold tracking-widest">Dashboard</span>
+</div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-800/50 dark:hover:bg-[#1F242D] transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-['Inter'] uppercase text-[11px] font-bold tracking-widest">Workbench</span>
+</div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-800/50 dark:hover:bg-[#1F242D] transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-['Inter'] uppercase text-[11px] font-bold tracking-widest">Vulnerabilities</span>
+</div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-800/50 dark:hover:bg-[#1F242D] transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="storage">storage</span>
+<span class="font-['Inter'] uppercase text-[11px] font-bold tracking-widest">Data Management</span>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-800 dark:border-[#222934] space-y-1">
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-800/50 dark:hover:bg-[#1F242D] transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] uppercase text-[11px] font-bold tracking-widest">System Logs</span>
+</div>
+<div class="text-slate-500 px-4 py-3 flex items-center gap-3 hover:text-slate-300 hover:bg-slate-800/50 dark:hover:bg-[#1F242D] transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span class="font-['Inter'] uppercase text-[11px] font-bold tracking-widest">Settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-[280px] p-6 space-y-6 bg-surface-container-lowest">
+<!-- Header Section -->
+<div class="flex items-end justify-between">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background">Risk Overview</h1>
+<p class="font-body-base text-body-base text-outline mt-1">Ecosystem-wide dependency security metrics and critical paths.</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-high border border-outline-variant px-4 py-2 flex items-center gap-2 rounded hover:border-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-label-caps text-label-caps uppercase">Last 30 Days</span>
+</button>
+<button class="bg-primary text-on-primary-container px-4 py-2 flex items-center gap-2 rounded font-label-caps text-label-caps uppercase hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Metric Card 1 -->
+<div class="bg-surface-container border border-outline-variant p-5 rounded-lg risk-stripe-critical flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-error uppercase tracking-widest">Total Vulnerabilities</span>
+<div class="font-display-lg text-[32px] text-on-surface mt-2">1,248</div>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<span class="material-symbols-outlined text-error text-[16px]">trending_up</span>
+<span class="text-error font-body-sm text-body-sm">+12% from last week</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container border border-outline-variant p-5 rounded-lg risk-stripe-high flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-tertiary uppercase tracking-widest">Mean Time to Remediate</span>
+<div class="font-display-lg text-[32px] text-on-surface mt-2">4.2 <span class="text-body-base font-normal text-outline">days</span></div>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<span class="material-symbols-outlined text-tertiary text-[16px]">trending_down</span>
+<span class="text-tertiary font-body-sm text-body-sm">-0.8d improved</span>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface-container border border-outline-variant p-5 rounded-lg risk-stripe-medium flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Critical Paths Found</span>
+<div class="font-display-lg text-[32px] text-on-surface mt-2">14</div>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<span class="material-symbols-outlined text-primary text-[16px]">security</span>
+<span class="text-primary font-body-sm text-body-sm">3 neutralized today</span>
+</div>
+</div>
+<!-- Metric Card 4 -->
+<div class="bg-surface-container border border-outline-variant p-5 rounded-lg flex flex-col justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-outline uppercase tracking-widest">Scanned Repos</span>
+<div class="font-display-lg text-[32px] text-on-surface mt-2">412</div>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<span class="material-symbols-outlined text-secondary text-[16px]">sync</span>
+<span class="text-secondary font-body-sm text-body-sm">Last scan 4m ago</span>
+</div>
+</div>
+</div>
+<!-- Heat Map & Top Risky Libraries -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- Heat Map Component -->
+<div class="xl:col-span-2 bg-surface-container border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="p-4 border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">Vulnerability Heat Map (By Project)</span>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 bg-error rounded-xs"></span>
+<span class="text-[10px] text-outline uppercase">Critical</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 bg-tertiary rounded-xs"></span>
+<span class="text-[10px] text-outline uppercase">High</span>
+</div>
+</div>
+</div>
+<div class="p-6 grid grid-cols-12 gap-1.5 flex-1 h-[400px]">
+<!-- Simulated Heatmap Squares -->
+<div class="bg-error col-span-2 row-span-2 rounded-xs flex items-center justify-center relative group">
+<span class="font-code-sm text-on-error opacity-0 group-hover:opacity-100 transition-opacity">AUTH_SERVICE</span>
+</div>
+<div class="bg-error/80 col-span-1 rounded-xs"></div>
+<div class="bg-tertiary col-span-3 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-2 rounded-xs"></div>
+<div class="bg-tertiary/60 col-span-1 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-3 rounded-xs"></div>
+<div class="bg-error/90 col-span-2 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-1 rounded-xs"></div>
+<div class="bg-tertiary/40 col-span-4 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-2 rounded-xs"></div>
+<div class="bg-tertiary/80 col-span-4 row-span-2 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-2 rounded-xs"></div>
+<div class="bg-error/70 col-span-2 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-4 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-1 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-1 rounded-xs"></div>
+<div class="bg-error col-span-3 rounded-xs"></div>
+<div class="bg-tertiary col-span-3 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-12 rounded-xs"></div>
+<div class="bg-surface-container-highest col-span-4 rounded-xs"></div>
+<div class="bg-error/90 col-span-2 rounded-xs"></div>
+<div class="bg-tertiary/50 col-span-6 rounded-xs"></div>
+</div>
+</div>
+<!-- Top Risky Libraries List -->
+<div class="bg-surface-container border border-outline-variant rounded-lg flex flex-col">
+<div class="p-4 border-b border-outline-variant">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">Top Risky Libraries</span>
+</div>
+<div class="flex-1 divide-y divide-outline-variant/30">
+<!-- Risky Item 1 -->
+<div class="p-4 hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-code-md text-code-md text-primary">lodash@4.17.21</span>
+<span class="bg-error text-white text-[10px] px-1.5 py-0.5 rounded-xs font-bold">CRITICAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-3">Prototype Pollution vulnerability found in 84 projects.</p>
+<div class="w-full bg-surface-container-lowest h-1 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 84%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[10px] text-outline uppercase">Occurrence</span>
+<span class="text-[10px] text-on-surface">84 Repos</span>
+</div>
+</div>
+<!-- Risky Item 2 -->
+<div class="p-4 hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-code-md text-code-md text-primary">axios@0.21.1</span>
+<span class="bg-tertiary text-on-tertiary-container text-[10px] px-1.5 py-0.5 rounded-xs font-bold">HIGH</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-3">SSRF vulnerability affecting critical gateway services.</p>
+<div class="w-full bg-surface-container-lowest h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 42%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[10px] text-outline uppercase">Occurrence</span>
+<span class="text-[10px] text-on-surface">42 Repos</span>
+</div>
+</div>
+<!-- Risky Item 3 -->
+<div class="p-4 hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-code-md text-code-md text-primary">log4j-core@2.14.1</span>
+<span class="bg-error text-white text-[10px] px-1.5 py-0.5 rounded-xs font-bold">CRITICAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-3">Legacy components found in internal analytics tooling.</p>
+<div class="w-full bg-surface-container-lowest h-1 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 12%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[10px] text-outline uppercase">Occurrence</span>
+<span class="text-[10px] text-on-surface">12 Repos</span>
+</div>
+</div>
+<!-- Risky Item 4 -->
+<div class="p-4 hover:bg-surface-container-high transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="font-code-md text-code-md text-primary">moment@2.29.1</span>
+<span class="border border-tertiary text-tertiary text-[10px] px-1.5 py-0.5 rounded-xs font-bold">MEDIUM</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mb-3">ReDoS vulnerability in parsing large date strings.</p>
+<div class="w-full bg-surface-container-lowest h-1 rounded-full overflow-hidden">
+<div class="bg-outline h-full" style="width: 65%"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-[10px] text-outline uppercase">Occurrence</span>
+<span class="text-[10px] text-on-surface">65 Repos</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Analysis Table Section -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden">
+<div class="p-4 border-b border-outline-variant flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">Critical Dependency Path Tracking</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="bg-surface-container-low border border-outline-variant pl-10 pr-4 py-1.5 rounded text-sm focus:outline-none focus:border-primary w-64" placeholder="Search paths..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="px-4 py-3 font-label-caps text-label-caps text-outline uppercase border-b border-outline-variant">Severity</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-outline uppercase border-b border-outline-variant">Project Name</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-outline uppercase border-b border-outline-variant">Dependency Path</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-outline uppercase border-b border-outline-variant">Vulnerability</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-outline uppercase border-b border-outline-variant">Remediation</th>
+<th class="px-4 py-3 font-label-caps text-label-caps text-outline uppercase border-b border-outline-variant">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-4 py-3"><span class="bg-error text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Critical</span></td>
+<td class="px-4 py-3 font-body-base text-on-surface font-medium">Core Banking API</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-outline">
+<span class="text-primary">api-gateway</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary">auth-module</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-error font-bold">lodash@4.17.20</span>
+</div>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">CVE-2020-28500</td>
+<td class="px-4 py-3"><span class="text-primary font-code-sm">Upgrade to 4.17.21</span></td>
+<td class="px-4 py-3">
+<button class="text-primary hover:underline font-label-caps text-label-caps uppercase">View Graph</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-4 py-3"><span class="bg-error text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Critical</span></td>
+<td class="px-4 py-3 font-body-base text-on-surface font-medium">Payment Processor</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-outline">
+<span class="text-primary">pay-worker</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-error font-bold">log4j-core@2.14.0</span>
+</div>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">CVE-2021-44228</td>
+<td class="px-4 py-3"><span class="text-primary font-code-sm">Upgrade to 2.17.1</span></td>
+<td class="px-4 py-3">
+<button class="text-primary hover:underline font-label-caps text-label-caps uppercase">View Graph</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="px-4 py-3"><span class="bg-tertiary text-on-tertiary-container text-[10px] px-2 py-0.5 rounded font-bold uppercase">High</span></td>
+<td class="px-4 py-3 font-body-base text-on-surface font-medium">Customer Portal UI</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-1 font-code-sm text-code-sm text-outline">
+<span class="text-primary">react-app</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-tertiary font-bold">axios@0.21.0</span>
+</div>
+</td>
+<td class="px-4 py-3 font-body-sm text-body-sm text-on-surface">CVE-2021-3749</td>
+<td class="px-4 py-3"><span class="text-primary font-code-sm">Upgrade to 0.21.4</span></td>
+<td class="px-4 py-3">
+<button class="text-primary hover:underline font-label-caps text-label-caps uppercase">View Graph</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-outline-variant flex items-center justify-between">
+<span class="text-body-sm text-outline">Showing 3 of 14 critical paths detected.</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button Contextual -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary-container rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-[60]">
+<span class="material-symbols-outlined text-[28px]" data-weight="fill">add_moderator</span>
+</button>
+</body></html>

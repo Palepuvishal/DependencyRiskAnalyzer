@@ -1,0 +1,6 @@
+ID,Type,Severity
+MyApp,Project,N/A
+express,Library,N/A
+lodash,Library,N/A
+4.17.20,Version,N/A
+unknown,Vulnerability,HIGH
